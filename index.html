@@ -11,23 +11,34 @@
 
 <body class="background">
   <header class="fixed top-4 right-4 z-50">
-       <div class="stage">
-        <input class="switch-input" id="toggle-switch" type="checkbox" />
-        <label class="switch" for="toggle-switch">
-          <span class="track">
-            <span class="knob"></span>
-          </span>
-        </label>
-      </div>
-    </header>
+    <div class="stage">
+      <input class="switch-input" id="toggle-switch" type="checkbox" />
+      <label class="switch" for="toggle-switch">
+        <span class="track">
+          <span class="knob"></span>
+        </span>
+      </label>
+    </div>
+  </header>
   <main class="app min-h-screen flex items-center justify-center relative" id="container">
-    
+
     <!-- <h1>App Title</h1> -->
     <section class="mx-auto flex flex-col-reverse gap-16 md:gap-32 md:grid max-w-225 md:grid-cols-2 items-center px-4">
       <div class="flex flex-col items-start">
         <div class="textarea-wrapper relative w-full">
           <div id="loadingScreen" class="loadingView hidden">
-            <span class="relative z-50 flex justify-center items-center h-40 md:h-60">Generating...</span>
+            <svg aria-hidden="true" class="loading-spinner" viewBox="0 0 100 101"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                class="loading-spinner-track" />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                class="loading-spinner-head" />
+            </svg>
+            <span class="loading-label">
+              Generating...
+            </span>
           </div>
           <textarea name="" id="text-area" placeholder="Text will be generated here."></textarea>
         </div>
@@ -35,7 +46,8 @@
           <button id="generateBtn" class="generate-btn">Generate alt text</button>
           <button id="copyBtn" class="copy-btn">
             <span id="copyBtnLabel">Copy text</span>
-            <svg id="copyIcon" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg id="copyIcon" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
               <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
             </svg>
@@ -43,24 +55,25 @@
         </div>
       </div>
       <div id="uploadArea" class="flex justify-center relative h-90 w-90 cursor-pointer group">
-          <span class="absolute bubble group-hover:scale-105"></span>
-          <span class="absolute bubble-2 group-hover:scale-105"></span>
-          <span class="absolute bubble-3 group-hover:scale-105"></span>
-          <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <form action="">
-              <div class="flex flex-col justify-center items-center">
-                <label class="cursor-pointer"><img id="uploadIcon" class="w-24" src="./assets/icons/upload.svg" alt=""></label>
-                <input accept="image/*" type="file" id="imgInput" class="hidden">
-                <figure id="figure" class="hidden">
-                  <figcaption class="sr-only">Preview of the picture</figcaption>
-                  <img src="" alt="" id="figureImage" class="max-w-50">
-                </figure>
-              </div>
-            </form>
-            <p class="text-sm leading-relaxed text-caption pt-4">
-              Click to select or Drag and Drop file here
-            </p>
-          </div>
+        <span class="absolute bubble group-hover:scale-105"></span>
+        <span class="absolute bubble-2 group-hover:scale-105"></span>
+        <span class="absolute bubble-3 group-hover:scale-105"></span>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+          <form action="">
+            <div class="flex flex-col justify-center items-center">
+              <label class="cursor-pointer"><img id="uploadIcon" class="w-24" src="./assets/icons/upload.svg"
+                  alt=""></label>
+              <input accept="image/*" type="file" id="imgInput" class="hidden">
+              <figure id="figure" class="hidden">
+                <figcaption class="sr-only">Preview of the picture</figcaption>
+                <img src="" alt="" id="figureImage" class="max-w-50">
+              </figure>
+            </div>
+          </form>
+          <p class="text-sm leading-relaxed text-caption pt-4">
+            Click to select or Drag and Drop file here
+          </p>
+        </div>
       </div>
     </section>
   </main>

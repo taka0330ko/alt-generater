@@ -253,9 +253,33 @@
     }
 
     .loadingView{
-        @apply absolute z-10 inset-0 w-full h-full rounded-lg bg-loading pointer-events-none;
+        @apply absolute z-10 inset-0 w-full h-full rounded-lg bg-loading pointer-events-none flex flex-col items-center justify-center gap-3 overflow-hidden;
     }
-    
+
+    .loading-spinner {
+        @apply relative z-50 w-10 h-10;
+        animation: spin 1s linear infinite;
+    }
+
+    .loading-spinner-track {
+        fill: var(--btn-bg-secondary);
+        opacity: 0.55;
+    }
+
+    .loading-spinner-head {
+        fill: var(--btn-bg-primary);
+    }
+
+    .loading-label {
+        @apply relative z-50 text-sm font-medium;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
     .loading-text{
         @apply absolute top-50 left-50 text-2xl
     }
