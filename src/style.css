@@ -24,16 +24,24 @@
     /* semantic light */
     --bg: var(--gray-100);
     --dot: var(--gray-200);
-    --border: var(--gray-200);
+    --border: var(--gray-500);
     --text: var(--gray-900);
     --text-muted: var(--gray-500);
     --bubble: var(--green-500);
     --primary-hover: var(--green-600);
     --primary-soft: var(--green-100);
     --text-area-bg: var(--gray-50);
+    --caption-color:var(--gray-800);
+    --caption-foreground:var(--gray-50);
 
     --drag-active: var(--gray-500);
-    --drag-outline: var(--color-green-600)
+    --drag-outline: var(--green-600);
+    --btn-bg-primary: var(--green-500);
+    --btn-bg-hover: var(--green-400);
+    --btn-bg-secondary: var(--gray-50);
+    --border-color: var(--gray-200);
+
+    --ease-spring: linear(0, 0.0282, 0.1054, 0.2195, 0.3584, 0.5107, 0.6659, 0.8149, 0.9506, 1.0676, 1.1625, 1.2335, 1.2805, 1.3046, 1.3083, 1.2944, 1.2666, 1.2285, 1.1839, 1.1362, 1.0885, 1.0435, 1.0032, 0.9691, 0.9421, 0.9225, 0.9102, 0.9048, 0.9055, 0.9113, 0.921, 0.9335, 0.9477, 0.9626, 0.9771, 0.9906, 1.0025, 1.0124, 1.0201, 1.0254, 1.0285, 1.0296, 1.0288, 1.0266, 1.0233, 1.0192, 1.0147, 1.0101, 1.0057, 1.0017, 0.9982, 0.9953, 0.9932, 0.9918, 0.991, 0.9909, 0.9913, 0.9921, 0.9932, 0.9945, 0.9959, 0.9973, 0.9986, 0.9998, 1.0009, 1.0017, 1.0023, 1.0026, 1.0028, 1.0028, 1.0026, 1.0024, 1.002, 1.0016, 1.0011, 1.0007, 1.0003, 0.9999, 0.9996, 0.9994, 0.9993, 0.9992, 0.9991, 0.9991, 0.9992, 0.9993, 0.9994, 0.9996, 0.9997, 0.9998, 0.9999, 1, 1.0001, 1.0002, 1.0002, 1.0003, 1.0003, 1.0003, 1.0002, 1.0002, 1);
 }
 
 /* semantic dark */
@@ -41,12 +49,21 @@
     --bg: var(--gray-900);
     --dot: var(--gray-700);
     --border: var(--gray-400);
-    --text: var(--gray-100);
+    --text: var(--gray-200);
     --text-muted: var(--gray-500);
-    --bubble: var(--green-300);
+    --text-area-bg: var(--gray-500);
+    --caption-color:var(--gray-50);
+    --caption-foreground:var(--gray-900);
+
+    --bubble: var(--green-500);
     --primary-hover: var(--green-300);
-    --drag-active:var(var(--gray-200));
-    --drag-outline: var(--color-green-600)
+    --drag-active: var(--gray-200);
+    --drag-outline: var(--color-green-600);
+    --btn-bg-primary: var(--green-500);
+    --btn-bg-hover: var(--green-600);
+    --btn-bg-secondary: var(--gray-900);
+    --border-color: var(--gray-100);
+
 }
 
 
@@ -54,15 +71,26 @@
     --color-text: var(--text);
     --color-bubble: var(--bubble);
     --background-image-dot: radial-gradient(var(--dot)2px, var(--bg) 2px);
-  --color-drag-active: var(--drag-active);
-  --color-drag-outline: var(--drag-outline);
-    --color-text-area:var(--text-area-bg);
+    --color-drag-active: var(--drag-active);
+    --color-drag-outline: var(--drag-outline);
+    --color-text-area: var(--text-area-bg);
+    --color-btn: var(--btn-bg-primary);
+    --color-btn-hover: var(--btn-bg-hover);
+    --color-outline: var(--border);
+    --color-caption: var(--caption-color);
+    --color-foreground: var(--caption-foreground);
+    --color-btn-secondary:var(--btn-bg-secondary);
 }
 
 @layer base {
     body {
         @apply text-text
     }
+
+    button{
+        @apply text-caption
+    }
+
 }
 
 .background {
@@ -75,54 +103,135 @@
         width: 400px;
         height: 400px;
         animation: bubble 60s linear infinite;
-        }
+    }
+
     .bubble-2 {
         @apply bg-bubble opacity-40;
         width: 400px;
         height: 400px;
         animation: bubble 60s linear infinite;
         animation-delay: -10s;
-        }
+    }
+
     .bubble-3 {
         @apply bg-bubble opacity-40;
         width: 400px;
         height: 400px;
         animation: bubble 60s linear infinite;
         animation-delay: -15s;
-        }
-    @keyframes bubble {
-    0%  { border-radius: 48% 52% 68% 32% / 42% 28% 72% 58%; }
-    5%  { border-radius: 48% 52% 41% 59% / 66% 37% 63% 34%; }
-    10% { border-radius: 69% 31% 71% 29% / 67% 31% 69% 33%; }
-    15% { border-radius: 60% 40% 71% 29% / 63% 65% 35% 37%; }
-    20% { border-radius: 61% 39% 51% 49% / 57% 58% 42% 43%; }
-    25% { border-radius: 66% 34% 25% 75% / 47% 30% 70% 53%; }
-    30% { border-radius: 32% 68% 38% 62% / 65% 60% 40% 35%; }
-    35% { border-radius: 63% 37% 41% 59% / 35% 38% 62% 65%; }
-    40% { border-radius: 57% 43% 49% 51% / 55% 71% 29% 45%; }
-    45% { border-radius: 47% 53% 34% 66% / 65% 36% 64% 35%; }
-    50% { border-radius: 44% 56% 32% 68% / 69% 26% 74% 31%; }
-    55% { border-radius: 28% 72% 37% 63% / 71% 44% 56% 29%; }    
-    60% { border-radius: 38% 62% 35% 65% / 74% 53% 47% 26%; }
-    65% { border-radius: 73% 27% 46% 54% / 54% 47% 53% 46%; }
-    70% { border-radius: 75% 25% 47% 53% / 49% 53% 47% 51%; }
-    75% { border-radius: 62% 38% 43% 57% / 55% 60% 40% 45%; }
-    80% { border-radius: 41% 59% 65% 35% / 73% 50% 50% 27%; }
-    85% { border-radius: 55% 45% 57% 43% / 73% 61% 39% 27%; }
-    90% { border-radius: 74% 26% 33% 67% / 40% 65% 35% 60%; }
-    95% { border-radius: 58% 42% 57% 43% / 53% 45% 55% 47%; }
-    100%{ border-radius: 48% 52% 68% 32% / 42% 28% 72% 58%; }
-}
-  #container {
-    @apply relative;
-  }
+    }
 
-  .drag-overlay::before {
-    content: "";
-    @apply absolute inset-2 z-10 rounded-2xl bg-drag-active/50 outline-2 
-    outline-dashed outline-drag-outline pointer-events-none;
-  }
-    #text-area{
-        @apply bg-text-area h-70 w-full max-w-95 rounded-lg border 
+    @keyframes bubble {
+        0% {
+            border-radius: 48% 52% 68% 32% / 42% 28% 72% 58%;
+        }
+
+        5% {
+            border-radius: 48% 52% 41% 59% / 66% 37% 63% 34%;
+        }
+
+        10% {
+            border-radius: 69% 31% 71% 29% / 67% 31% 69% 33%;
+        }
+
+        15% {
+            border-radius: 60% 40% 71% 29% / 63% 65% 35% 37%;
+        }
+
+        20% {
+            border-radius: 61% 39% 51% 49% / 57% 58% 42% 43%;
+        }
+
+        25% {
+            border-radius: 66% 34% 25% 75% / 47% 30% 70% 53%;
+        }
+
+        30% {
+            border-radius: 32% 68% 38% 62% / 65% 60% 40% 35%;
+        }
+
+        35% {
+            border-radius: 63% 37% 41% 59% / 35% 38% 62% 65%;
+        }
+
+        40% {
+            border-radius: 57% 43% 49% 51% / 55% 71% 29% 45%;
+        }
+
+        45% {
+            border-radius: 47% 53% 34% 66% / 65% 36% 64% 35%;
+        }
+
+        50% {
+            border-radius: 44% 56% 32% 68% / 69% 26% 74% 31%;
+        }
+
+        55% {
+            border-radius: 28% 72% 37% 63% / 71% 44% 56% 29%;
+        }
+
+        60% {
+            border-radius: 38% 62% 35% 65% / 74% 53% 47% 26%;
+        }
+
+        65% {
+            border-radius: 73% 27% 46% 54% / 54% 47% 53% 46%;
+        }
+
+        70% {
+            border-radius: 75% 25% 47% 53% / 49% 53% 47% 51%;
+        }
+
+        75% {
+            border-radius: 62% 38% 43% 57% / 55% 60% 40% 45%;
+        }
+
+        80% {
+            border-radius: 41% 59% 65% 35% / 73% 50% 50% 27%;
+        }
+
+        85% {
+            border-radius: 55% 45% 57% 43% / 73% 61% 39% 27%;
+        }
+
+        90% {
+            border-radius: 74% 26% 33% 67% / 40% 65% 35% 60%;
+        }
+
+        95% {
+            border-radius: 58% 42% 57% 43% / 53% 45% 55% 47%;
+        }
+
+        100% {
+            border-radius: 48% 52% 68% 32% / 42% 28% 72% 58%;
+        }
+    }
+
+    .group:hover 
+    .bubble,
+    .bubble-2,
+    .bubble-3 {
+        transition: all 1s var(--ease-spring)
+    }
+
+    #container {
+        @apply relative;
+    }
+
+    .generate-btn {
+        @apply inline-flex bg-btn text-foreground rounded-full py-2 px-4 hover:bg-btn-hover cursor-pointer
+    }
+
+    .copy-btn {
+        @apply inline-flex bg-btn-secondary rounded-full py-2 px-4 border border-outline gap-2 cursor-pointer
+    }
+
+    .drag-overlay::before {
+        content: "";
+        @apply absolute inset-2 z-10 rounded-2xl bg-drag-active/50 outline-2 outline-dashed outline-drag-outline pointer-events-none;
+    }
+
+    #text-area {
+        @apply bg-text-area h-40 md:h-60 w-full max-w-95 rounded-lg border border-outline p-2
     }
 }

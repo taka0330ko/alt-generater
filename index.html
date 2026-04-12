@@ -12,31 +12,37 @@
 <body class="background">
   <main class="app min-h-screen flex items-center justify-center" id="container">
     <!-- <h1>App Title</h1> -->
-    <section class="mx-auto grid max-w-[900px] grid-cols-2 items-center gap-x-16">
+    <section class="mx-auto flex flex-col-reverse gap-16 md:gap-32 md:grid max-w-225 md:grid-cols-2 items-center px-4">
       <div class="flex flex-col items-start">
         <textarea name="" id="text-area" placeholder="Text will be generated here."></textarea>
-        <div>
-          <button>Generate alt text</button>
-          <button>Copy text</button>
+        <div class="pt-4 flex gap-4">
+          <button id="generateBtn" class="generate-btn">Generate alt text</button>
+          <button id="copyBtn" class="copy-btn"><span id="copyBtnLabel">Copy text</span><img id="copyIcon" src="./assets/icons/copy.svg" alt=""></button>
         </div>
       </div>
-      <div class="flex justify-center">
-  <div class="relative h-[360px] w-[360px]">
-    <span class="absolute bubble"></span>
-    <span class="absolute bubble-2"></span>
-    <span class="absolute bubble-3"></span>
-
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-      <input type="file" id="files">
-      <div class="icon"></div>
-      <p class="max-w-[220px] text-sm leading-relaxed">
-        Click to select or Drag and Drop file here
-      </p>
-    </div>
-  </div>
-</div>
+      <div id="uploadArea" class="flex justify-center relative h-90 w-90 cursor-pointer group">
+          <span class="absolute bubble group-hover:scale-105"></span>
+          <span class="absolute bubble-2 group-hover:scale-105"></span>
+          <span class="absolute bubble-3 group-hover:scale-105"></span>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <form action="">
+              <div class="flex flex-col justify-center items-center">
+                <label class="cursor-pointer"><img id="uploadIcon" class="w-24" src="./assets/icons/upload.svg" alt=""></label>
+                <input accept="image/*" type="file" id="imgInput" class="hidden">
+                <figure id="figure" class="hidden">
+                  <figcaption class="sr-only">Preview of the picture</figcaption>
+                  <img src="" alt="" id="figureImage" class="max-w-50">
+                </figure>
+              </div>
+            </form>
+            <p class="text-sm leading-relaxed text-caption pt-4">
+              Click to select or Drag and Drop file here
+            </p>
+          </div>
+      </div>
     </section>
   </main>
+  <script src="https://js.puter.com/v2/"></script>
   <script type="module" src="./dist/main.js"></script>
 </body>
 
