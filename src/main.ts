@@ -1,5 +1,6 @@
 declare const puter: any;
 
+
 const dragZone = document.getElementById('container');
 const input = document.getElementById('imgInput') as HTMLInputElement | null;
 const figure = document.getElementById('figure');
@@ -9,9 +10,15 @@ const uploadArea = document.getElementById('uploadArea');
 const uploadIcon = document.getElementById('uploadIcon');
 const copyBtn = document.getElementById('copyBtn');
 const copyBtnLabel = document.getElementById('copyBtnLabel');
-
-
+const loadingScreen = document.getElementById('loadingScreen');
 const geneBtn = document.getElementById('generateBtn');
+const toggleBtn = document.querySelector('.switch-input');
+
+function toggleTheme(){
+    toggleBtn?.addEventListener('click', ()=>{
+  document.documentElement.classList.toggle('dark');
+    })
+}
 
 function previewFile(file: File | undefined) {
     if (file) {
@@ -55,15 +62,24 @@ function inputPreview() {
 }
 
 function generateAlt(file: File | undefined) {
-    if (file && textArea instanceof HTMLTextAreaElement) {
+    if (file && textArea instanceof HTMLTextAreaElement && geneBtn instanceof HTMLButtonElement) {
         geneBtn?.addEventListener('click', async () => {
-            textArea.value = "Generating..."
+            geneBtn.disabled = true;
+            textArea.disabled = true;
+            textArea.classList.add('cursor-not-allowed');
+            geneBtn.classList.add('cursor-not-allowed');
+            startLoadingAnimation();
             try {
                 const res = await puter?.ai.chat("generate alt text of this picture", file);
                 textArea.value = res.message.content;
-                console.log(res.message.content);
             } catch (err) {
                 console.error(err);
+            } finally {
+                geneBtn.disabled = false;
+                textArea.disabled = false;
+                textArea.classList.remove('cursor-not-allowed');
+                geneBtn.classList.remove('cursor-not-allowed');
+                stopLoadingAnimation();
             }
         })
     }
@@ -72,12 +88,12 @@ function generateAlt(file: File | undefined) {
 function copy() {
     copyBtn?.addEventListener('click', async () => {
         if (!(textArea instanceof HTMLTextAreaElement)) return;
-        if(!copyBtnLabel) return;
+        if (!copyBtnLabel) return;
         try {
             await navigator.clipboard.writeText(textArea?.value);
             copyBtnLabel.textContent = "Copied!"
             setTimeout(() => {
-            copyBtnLabel.textContent = "Copy Text"
+                copyBtnLabel.textContent = "Copy Text"
             }, 2000)
 
         } catch (err) {
@@ -86,7 +102,42 @@ function copy() {
     })
 }
 
-copy();
+function loadingAnimation() {
+    const bubbles = [
+        { x: 8, y: 10, size: 72, delay: 0, float: 14, duration: 5 },
+        { x: 68, y: 12, size: 56, delay: -4, float: 20, duration: 6 },
+        { x: 18, y: 48, size: 88, delay: -8, float: 12, duration: 4 },
+        { x: 76, y: 58, size: 64, delay: -12, float: 18, duration: 7 },
+        { x: 46, y: 30, size: 96, delay: -16, float: 16, duration: 5.5 },
+    ];
 
+    bubbles.forEach(({ x, y, size, delay, float, duration }) => {
+        const bubble = document.createElement('span');
+        bubble.classList.add("bubble-sm", "loading-bubble");
+        bubble.style.left = `${x}%`;
+        bubble.style.top = `${y}%`;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.setProperty('--float-distance', `${float}px`);
+        bubble.style.setProperty('--float-duration', `${duration}s`);
+        bubble.style.animationDelay = `0s, ${delay}s`;
+        loadingScreen?.appendChild(bubble);
+    })
+}
+
+function startLoadingAnimation() {
+    loadingScreen?.classList.remove('hidden');
+    loadingAnimation();
+}
+
+function stopLoadingAnimation() {
+    loadingScreen?.classList.add('hidden');
+    document.querySelectorAll('.loading-bubble').forEach((bubble) => {
+        bubble.remove();
+    })
+}
+
+toggleTheme();
+copy();
 inputPreview();
 dragAndDrop();
