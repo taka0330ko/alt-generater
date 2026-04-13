@@ -14,6 +14,8 @@ const loadingScreen = document.getElementById('loadingScreen');
 const geneBtn = document.getElementById('generateBtn');
 const toggleBtn = document.querySelector('.switch-input');
 
+let currentFile: File | undefined;
+
 function toggleTheme(){
     toggleBtn?.addEventListener('click', ()=>{
   document.documentElement.classList.toggle('dark');
@@ -21,11 +23,11 @@ function toggleTheme(){
 }
 
 function previewFile(file: File | undefined) {
+    currentFile = file;
     if (file) {
         figureImage?.setAttribute('src', URL.createObjectURL(file));
         figure?.classList.remove('hidden');
         uploadIcon?.classList.add('hidden');
-        generateAlt(file)
     } else {
         figure?.classList.add('hidden');
         uploadIcon?.classList.remove('hidden');
@@ -61,16 +63,17 @@ function inputPreview() {
     })
 }
 
-function generateAlt(file: File | undefined) {
-    if (file && textArea instanceof HTMLTextAreaElement && geneBtn instanceof HTMLButtonElement) {
+function generateAlt() {
+    if (textArea instanceof HTMLTextAreaElement && geneBtn instanceof HTMLButtonElement) {
         geneBtn?.addEventListener('click', async () => {
             geneBtn.disabled = true;
             textArea.disabled = true;
             textArea.classList.add('cursor-not-allowed');
             geneBtn.classList.add('cursor-not-allowed');
             startLoadingAnimation();
+
             try {
-                const res = await puter?.ai.chat("generate alt text of this picture", file);
+                const res = await puter?.ai.chat("generate alt text of this picture", currentFile);
                 textArea.value = res.message.content;
             } catch (err) {
                 console.error(err);
@@ -137,6 +140,7 @@ function stopLoadingAnimation() {
     })
 }
 
+generateAlt();
 toggleTheme();
 copy();
 inputPreview();
