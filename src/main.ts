@@ -1,6 +1,5 @@
 declare const puter: any;
 
-
 const dragZone = document.getElementById('container');
 const input = document.getElementById('imgInput') as HTMLInputElement | null;
 const figure = document.getElementById('figure');
@@ -24,13 +23,22 @@ function toggleTheme(){
 
 function previewFile(file: File | undefined) {
     currentFile = file;
+
     if (file) {
         figureImage?.setAttribute('src', URL.createObjectURL(file));
         figure?.classList.remove('hidden');
         uploadIcon?.classList.add('hidden');
+
+        if (geneBtn instanceof HTMLButtonElement) {
+            geneBtn.disabled = false;
+        }
     } else {
         figure?.classList.add('hidden');
         uploadIcon?.classList.remove('hidden');
+
+        if (geneBtn instanceof HTMLButtonElement) {
+            geneBtn.disabled = true;
+        }
     }
 }
 
@@ -108,10 +116,15 @@ function copy() {
 function loadingAnimation() {
     const bubbles = [
         { x: 8, y: 10, size: 72, delay: 0, float: 14, duration: 5 },
-        { x: 68, y: 12, size: 56, delay: -4, float: 20, duration: 6 },
-        { x: 18, y: 48, size: 88, delay: -8, float: 12, duration: 4 },
+        { x: 68, y: 12, size: 66, delay: -8, float: 20, duration: 6 },
+        { x: 45, y: 12, size: 86, delay: -4, float: 30, duration: 6 },
+        { x: 12, y: 68, size: 58, delay: -10, float: 12, duration: 9 },
+        { x: 18, y: 68, size: 88, delay: -2, float: 16, duration: 4 },
+        { x: 23, y: 38, size: 62, delay: -8, float: 12, duration: 9 },
+        { x: 6, y: 48, size: 48, delay: -18, float: 22, duration: 5 },
         { x: 76, y: 58, size: 64, delay: -12, float: 18, duration: 7 },
-        { x: 46, y: 30, size: 96, delay: -16, float: 16, duration: 5.5 },
+        { x: 36, y: 48, size: 96, delay: -16, float: 16, duration: 5.5 },
+        { x: 58, y: 50, size: 96, delay: -6, float: 16, duration: 9.5 },
     ];
 
     bubbles.forEach(({ x, y, size, delay, float, duration }) => {

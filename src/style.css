@@ -38,6 +38,7 @@
     --drag-active: var(--gray-500);
     --drag-outline: var(--green-600);
     --btn-bg-primary: var(--green-500);
+    --btn-mute: var(--gray-300);
     --btn-bg-hover: var(--green-400);
     --btn-bg-secondary: var(--gray-50);
     --border-color: var(--gray-300);
@@ -61,6 +62,7 @@
     --drag-active: var(--gray-200);
     --drag-outline: var(--color-green-600);
     --btn-bg-primary: var(--green-500);
+    --btn-mute: var(--gray-400);
     --btn-bg-hover: var(--green-600);
     --btn-bg-secondary: var(--gray-900);
     --border-color: var(--gray-100);
@@ -76,6 +78,7 @@
     --color-drag-outline: var(--drag-outline);
     --color-text-area: var(--text-area-bg);
     --color-btn: var(--btn-bg-primary);
+    --color-btn-mute: var(--btn-mute);
     --color-btn-hover: var(--btn-bg-hover);
     --color-outline: var(--border-color);
     --color-caption: var(--caption-color);
@@ -236,6 +239,10 @@
 
     .generate-btn {
         @apply inline-flex bg-btn text-foreground rounded-full py-2 px-4 hover:bg-btn-hover 
+    }
+
+    .generate-btn:disabled{
+        @apply bg-btn-mute cursor-not-allowed
     }
 
     .copy-btn {
