@@ -6,7 +6,8 @@
   "scripts": {
     "build:ts": "tsc --project tsconfig.json",
     "build:css": "tailwindcss -i ./src/style.css -o ./dist/style.css --minify",
-    "build": "npm run build:ts && npm run build:css",
+    "build:static": "node ./scripts/build-static.mjs",
+    "build": "npm run build:ts && npm run build:css && npm run build:static",
     "watch:ts": "tsc --project tsconfig.json --watch",
     "watch:css": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch"
   },
