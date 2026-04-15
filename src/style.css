@@ -95,6 +95,8 @@
     --color-outline: var(--border-color);
     --color-caption: var(--caption-color);
     --color-foreground: var(--caption-foreground);
+    --color-btn-secondary: var(--btn-bg-secondary);
+    --color-btn: var(--btn-bg-primary);
 }
 
 /* ==================================================
