@@ -144,6 +144,8 @@
         @apply bg-bubble opacity-40;
         width: 400px;
         height: 400px;
+        scale: 1;
+        transition: scale 1s var(--bubble-spring), opacity 1s var(--bubble-spring), border-radius 1s var(--bubble-spring);
         animation: bubble 60s linear infinite;
     }
 
@@ -158,7 +160,7 @@
     .group:hover .bubble,
     .group:hover .bubble-2,
     .group:hover .bubble-3 {
-        transition: transform 1s var(--bubble-spring), opacity 1s var(--bubble-spring), border-radius 1s var(--bubble-spring);
+        scale: 1.05;
     }
 
     /* Buttons */
