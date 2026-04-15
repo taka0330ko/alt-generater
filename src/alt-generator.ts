@@ -4,7 +4,7 @@ const textArea = document.getElementById('text-area');
 const geneBtn = document.getElementById('generateBtn');
 const loadingScreen = document.getElementById('loadingScreen');
 
-import {initLoadingAnimation} from "./loadingAnimation.js";
+import { initLoadingAnimation } from "./loadingAnimation.js";
 import { getCurrentFile } from './file-state.js';
 
 
