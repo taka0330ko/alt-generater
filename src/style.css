@@ -123,6 +123,11 @@
     @apply bg-dot bg-size-[24px_24px];
 }
 
+.app-logo {
+    width: clamp(140px, 32vw, 240px);
+    height: auto;
+}
+
 /* ==================================================
    Components
    Styles grouped by visible UI parts
